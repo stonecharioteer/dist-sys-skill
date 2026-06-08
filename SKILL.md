@@ -125,12 +125,14 @@ When responding, include:
 3. If there is an unfinished attempt (`metadata.yaml` with `status: in_progress`), resume it.
 4. Otherwise create a new dated attempt.
 5. Start the guided study loop in **interviewer mode**.
+6. Include the exercise's **Prep reading** from `README.md` in the opening response, both for resumed and fresh attempts.
 
 ### `dist-sys <n> new`
 
 1. Resolve the exercise.
 2. Always create a fresh attempt.
 3. Start the guided study loop in **interviewer mode**.
+4. Include the exercise's **Prep reading** from `README.md` in the opening response.
 
 ### `dist-sys <n> list`
 
@@ -176,13 +178,15 @@ First, frame the exercise like an interviewer would:
 3. State the expected scope clearly.
 4. Mention any especially important constraints.
 5. Tell the learner what kind of answer is expected at this tier.
-6. Ask the first interview question.
+6. Show the bounded **Prep reading** section from the exercise `README.md` as part of the opening, preserving any required vs optional structure and links.
+7. Ask the first interview question.
 
 A good opening sounds like:
 
 - "Let's work on 01, In-memory rate limiter."
 - "You're designing an in-process rate-limiting component for a single API process..."
 - "Keep this local and simple; no distributed coordination yet."
+- "Prep reading: ..."
 - "I'll ask this like a mock interview. Start by telling me your assumptions and the interface you want to design."
 
 After the opening, infer from the learner's messages whether they are:

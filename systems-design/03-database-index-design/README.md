@@ -39,11 +39,53 @@ This exercise exists to strengthen the step from the previous topics into `found
 
 ## What to build
 
-Design indexes and access paths for a relational-style workload with a few dominant queries and a moderate write rate.
+Design indexes and access paths for a small relational workload with a fixed schema and explicit hot queries.
+
+### Problem statement
+
+You are given a single-node relational database for a Pokédex-style game.
+
+Assume these tables exist:
+
+- `users(id, name)`
+- `regions(id, name)`
+- `pokemon(id, name, primary_type, secondary_type, region_id)`
+- `sightings(user_id, pokemon_id, region_id, sighted_at)`
+
+The workload is read-heavy, but sightings are still written continuously.
+
+Assume:
+
+- about 100,000 users
+- about 5,000 Pokémon species
+- about 50 million rows in `sightings`
+- storage budget is limited: do not propose more than 5 secondary indexes total across all tables unless you can justify them strongly
+- this is a `foundation` exercise: stay local to one database node and do not introduce sharding, replicas, or distributed search
+
+Your job is to choose a small index set for the following hot queries:
+
+1. find Pokémon species by `region` and `primary_type` (optionally also `secondary_type`)
+2. list all Pokémon sighted by a given user
+3. check whether a given user has ever sighted a specific Pokémon species
+4. list all sightings in a given region
+5. look up a user by exact `name`
+
+You should explain:
+
+- which indexes you would create
+- which query each index helps
+- which indexes you would avoid
+- what write and storage costs your choices introduce
 
 ## What a strong solution should show
 
-A good solution ties each index to query shapes, discusses update cost, and avoids indexing everything blindly.
+A good solution:
+
+- ties each index directly to one or more query shapes
+- prefers a small, high-value index set over indexing every column
+- notices when a composite index can replace a weaker single-column index
+- discusses read benefit vs write amplification and storage cost
+- stays within the exercise scope without introducing distributed concerns
 
 ## Deliverables for the learner
 
