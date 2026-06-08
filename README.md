@@ -20,11 +20,42 @@ The skill is designed around these chat commands:
 - `dist-sys ls pending`
 - `dist-sys next`
 - `dist-sys 01 start`
+- `dist-sys 01 start --mode strict_interview`
+- `dist-sys 01 start --depth deep`
 - `dist-sys 01 new`
+- `dist-sys 01 new --mode coaching`
+- `dist-sys 01 new --depth light`
 - `dist-sys 01 list`
 - `dist-sys 01 review`
 
 After `start` or `new`, the interaction should continue as natural chat in mock-interview style.
+
+## Interview modes
+
+The guided loop supports three interaction styles:
+
+- `coaching` — more scaffolding and clarification help
+- `balanced` — the default; open questions first, hints only as needed
+- `strict_interview` — minimal hints, closer to a real interview
+
+You can select one when starting an attempt, for example:
+
+- `dist-sys 05 start --mode strict_interview`
+- `dist-sys 05 new --mode coaching`
+
+## Evaluation depth
+
+Because these exercises are discussion-first rather than code-first, the skill also supports evaluation depth:
+
+- `light` — fewer follow-ups, focus on coherence
+- `standard` — probe assumptions, trade-offs, and one failure case
+- `deep` — the default; push on rejected alternatives, operational concerns, limits, and design defense
+
+Examples:
+
+- `dist-sys 05 start --depth deep`
+- `dist-sys 05 start --mode strict_interview --depth deep`
+- `dist-sys 05 new --depth light`
 
 ## Attempt lifecycle
 

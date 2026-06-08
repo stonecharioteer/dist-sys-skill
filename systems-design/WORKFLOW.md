@@ -9,7 +9,7 @@ Use commands in these forms:
 ```text
 dist-sys ls [attempted|pending]
 dist-sys next
-dist-sys <exercise-number> <action>
+dist-sys <exercise-number> <action> [--mode coaching|balanced|strict_interview] [--depth light|standard|deep]
 ```
 
 Examples:
@@ -19,7 +19,11 @@ Examples:
 - `dist-sys ls pending`
 - `dist-sys next`
 - `dist-sys 01 start`
+- `dist-sys 01 start --mode strict_interview`
+- `dist-sys 01 start --depth deep`
 - `dist-sys 01 new`
+- `dist-sys 01 new --mode coaching`
+- `dist-sys 01 new --depth light`
 - `dist-sys 01 list`
 - `dist-sys 01 review`
 - `dist-sys 01 review 2026-06-07-attempt-01`
@@ -45,12 +49,16 @@ Examples:
 - if there is an unfinished active attempt, resume it
 - otherwise create a new attempt and begin questioning
 - frame the problem first like a mock interviewer before drilling into sub-questions
+- support `--mode coaching|balanced|strict_interview` to control how much scaffolding is given
+- support `--depth light|standard|deep` to control how deeply the learner is evaluated in discussion
 
 ### `dist-sys <n> new`
 
 - always create a new attempt for exercise `<n>`
 - begin a fresh guided chat loop
 - present the exercise as a mock interview prompt before asking the first question
+- support `--mode coaching|balanced|strict_interview` to control how much scaffolding is given
+- support `--depth light|standard|deep` to control how deeply the learner is evaluated in discussion
 
 ### `dist-sys <n> list`
 
@@ -71,7 +79,7 @@ Examples:
 
 After the entry command, the rest of the interaction should be natural chat.
 
-The opening should feel like a mock interview: restate the problem, define scope, mention key constraints, and then ask the learner the first question.
+The opening should feel like a mock interview: restate the problem, define scope, mention key constraints, ask the learner to restate the problem in their own words, ask how they want to approach it, and then ask the first substantive question.
 
 The agent should infer from conversation whether the learner is:
 
@@ -83,6 +91,8 @@ The agent should infer from conversation whether the learner is:
 - asking to wrap up the attempt
 
 The learner should not need extra commands for ordinary back-and-forth.
+
+Because these exercises are discussion-first, deeper evaluation should come from assumption testing, alternative comparison, failure-mode probing, operational reasoning, and final design defense rather than code-writing prompts.
 
 ## Attempt storage layout
 

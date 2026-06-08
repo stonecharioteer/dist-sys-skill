@@ -14,7 +14,7 @@ Recognize commands in these forms:
 ```text
 dist-sys ls [attempted|pending]
 dist-sys next
-dist-sys <exercise-number> <action> [arg]
+dist-sys <exercise-number> <action> [arg] [--mode coaching|balanced|strict_interview] [--depth light|standard|deep]
 ```
 
 Supported actions:
@@ -33,7 +33,11 @@ Examples:
 - `dist-sys ls pending`
 - `dist-sys next`
 - `dist-sys 01 start`
+- `dist-sys 01 start --mode strict_interview`
+- `dist-sys 01 start --depth deep`
 - `dist-sys 01 new`
+- `dist-sys 01 new --mode coaching`
+- `dist-sys 01 new --depth light`
 - `dist-sys 01 list`
 - `dist-sys 01 review`
 - `dist-sys 01 review 2026-06-07-attempt-01`
@@ -137,14 +141,18 @@ When responding, include:
 3. If there is an unfinished attempt (`metadata.yaml` with `status: in_progress`), resume it.
 4. Otherwise create a new dated attempt.
 5. Start the guided study loop in **interviewer mode**.
-6. Include the exercise's **Prep reading** from `README.md` in the opening response, both for resumed and fresh attempts.
+6. Respect `--mode coaching|balanced|strict_interview` if supplied; otherwise default to `balanced` or infer from the learner's request.
+7. Respect `--depth light|standard|deep` if supplied; otherwise default to `deep` or infer from the learner's request.
+8. Include the exercise's **Prep reading** from `README.md` in the opening response, both for resumed and fresh attempts.
 
 ### `dist-sys <n> new`
 
 1. Resolve the exercise.
 2. Always create a fresh attempt.
 3. Start the guided study loop in **interviewer mode**.
-4. Include the exercise's **Prep reading** from `README.md` in the opening response.
+4. Respect `--mode coaching|balanced|strict_interview` if supplied; otherwise default to `balanced` or infer from the learner's request.
+5. Respect `--depth light|standard|deep` if supplied; otherwise default to `deep` or infer from the learner's request.
+6. Include the exercise's **Prep reading** from `README.md` in the opening response.
 
 ### `dist-sys <n> list`
 
@@ -179,6 +187,72 @@ If there are no attempts, say so plainly.
 
 Once an attempt is active, the learner should be able to respond naturally in chat.
 
+### Interview strictness modes
+
+The study loop should support three interviewing styles, either inferred from the learner's request or set explicitly when they ask:
+
+- `coaching`
+- `balanced`
+- `strict_interview`
+
+Default to `balanced`.
+
+Mode behavior:
+
+- `coaching`:
+  - more clarification help
+  - more explicit scaffolding when the learner is stuck
+  - okay to offer examples earlier
+- `balanced`:
+  - ask open questions first
+  - offer hints only after the learner shows confusion or asks
+  - maintain interview feel without being overly withholding
+- `strict_interview`:
+  - minimize hints
+  - avoid suggesting likely solution structures unless the learner explicitly requests help
+  - prefer short interviewer-style follow-ups
+
+If the learner says things like:
+
+- "be stricter"
+- "don't hint"
+- "coach me more"
+- "treat this like a real interview"
+
+adapt the mode immediately and say so briefly.
+
+### Evaluation depth
+
+In addition to interview strictness, the study loop should support evaluation depth levels:
+
+- `light`
+- `standard`
+- `deep`
+
+Default to `deep`.
+
+Depth behavior:
+
+- `light`:
+  - fewer follow-up questions
+  - focus on getting to a coherent answer
+- `standard`:
+  - probe core assumptions, trade-offs, and failure cases
+- `deep`:
+  - probe assumptions more aggressively
+  - require at least one rejected alternative when the exercise format allows it
+  - ask explicit failure-mode and operational questions
+  - ask the learner to defend the chosen design, name the biggest weakness, and say what they would improve next
+
+If the learner says things like:
+
+- "push harder"
+- "go deeper"
+- "evaluate this more strictly"
+- "light touch"
+
+adapt the depth immediately and say so briefly.
+
 ## Interviewer-mode opening
 
 When starting a new or resumed attempt, do not jump straight to a tiny follow-up question.
@@ -192,7 +266,8 @@ First, frame the exercise like an interviewer would:
 5. Tell the learner what kind of answer is expected at this tier.
 6. Show the bounded **Prep reading** section from the exercise `README.md` as part of the opening, preserving any required vs optional structure and links.
 7. Ask the learner to briefly restate the problem in their own words before moving into design details.
-8. Only after that, ask the first substantive interview question.
+8. Ask how they would like to approach the answer before drilling into details.
+9. Only after that, ask the first substantive interview question.
 
 A good opening sounds like:
 
@@ -222,10 +297,22 @@ For `foundation` exercises:
 - do not push later distributed concerns
 - explicitly tell the learner what kind of answer you want next when they seem unsure
 - begin by asking the learner to rephrase the problem in their own words and describe how they would like to approach the answer
+- separate three phases clearly:
+  - problem clarification
+  - learner assumptions / framing
+  - actual design work
+- do not move into design work until the learner's mental model is clear enough
 - avoid prematurely steering them toward a specific implementation shape before they have shown their own understanding
 - do not reveal the most polished or "optimal" solution structure too early; let the learner propose a direction first, then coach from there
 - do not embed likely answers in the question itself through leading examples, parenthetical hints, or suggested data structures/API shapes unless the learner explicitly asks for hints
 - when asking about design choices, prefer open questions first; only offer examples after the learner asks for help or is clearly stuck
+- for bounded exercises, prefer the bounded prompt from the exercise README rather than asking the learner to invent the entire domain, schema, workload, and constraints from scratch
+- at `standard` or `deep` evaluation depth, probe at least assumptions, trade-offs, and one failure case
+- at `deep` evaluation depth, also probe:
+  - one rejected alternative
+  - one operational/observability concern
+  - one scaling or limit concern appropriate to the tier
+  - a short defense of why the chosen design fits this exercise
 
 For `applied` exercises:
 
@@ -296,6 +383,22 @@ At minimum capture:
 
 Do not dump the entire raw chat transcript. Summarize and structure the learner's content so the file remains readable.
 
+When the learner signals a settled answer with phrases like:
+
+- "this is my final answer"
+- "let's wrap up"
+- "that's my answer"
+
+append a short `### Final answer` section to `submission.md` that cleanly summarizes the final chosen design, not just the exploratory discussion.
+
+Before a full final review, especially at `standard` or `deep` evaluation depth, try to capture a compact pre-review summary covering:
+
+- assumptions
+- chosen design
+- rejected alternative (if any)
+- biggest risk / weakness
+- what the learner would improve next
+
 ## Diagram handling
 
 If the learner provides a path to an exported Excalidraw PNG or SVG:
@@ -317,7 +420,7 @@ When reviewing:
 4. Mention what is missing.
 5. Call out overengineering.
 6. State which concerns should be deferred to later exercises.
-7. Recommend one next step: revise, retry later, or move on.
+7. Recommend one next step using a standardized label: `move on`, `revise now`, or `redo later`.
 
 Write the full result to `review.md` using `systems-design/templates/attempt-review-template.md` as the shape.
 
@@ -328,6 +431,24 @@ Prefer exact phrases that map cleanly to the `ls` assessment label, for example:
 - `move on`
 - `revise now`
 - `redo later`
+
+### Checkpoint reviews
+
+If the learner asks for a checkpoint review before the final review, structure it explicitly around:
+
+- what is already strong enough
+- what is still missing
+- whether they should continue, tighten the answer, or wrap up
+
+Checkpoint reviews should not mark the attempt complete unless the learner is clearly asking for the full final review.
+
+For discussion-first exercises, use checkpoint and final reviews to deepen evaluation rather than asking for code. Good evaluation questions include:
+
+- Which assumption matters most to your design?
+- What alternative did you reject and why?
+- What breaks first under failure or load?
+- How would an operator notice the problem?
+- Why is this design appropriate for this curriculum tier?
 
 ## Practical file operations
 
@@ -351,6 +472,8 @@ Typical operations include:
 - Be explicit about scope when the learner is overcomplicating the exercise.
 - When starting an attempt, frame the problem before questioning.
 - Ask the learner to restate the problem in their own words before drilling into design specifics.
+- Ask how they want to approach the answer before narrowing into implementation details.
 - Let the learner propose an initial approach before suggesting likely solution structures.
 - Avoid putting candidate answers into the prompt unless the learner explicitly asks for examples or hints.
 - When the learner seems lost, restate the problem and ask a narrower interview question.
+- For foundation exercises especially, prefer bounded prompts from the README over asking the learner to invent every part of the problem setup.

@@ -49,8 +49,16 @@
 
 <!-- Fill in if diagrams were submitted -->
 
+## Checkpoint summary
+
+- What is already strong enough?
+- What is still missing?
+- Should the learner continue, tighten the answer, or wrap up?
+
 ## Recommended next step
 
-- revise this attempt
-- retry later with a new attempt
-- move on to the next exercise
+Use exactly one of these phrases so status tooling can parse it reliably:
+
+- revise now
+- redo later
+- move on
