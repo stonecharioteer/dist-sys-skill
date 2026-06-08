@@ -1,0 +1,9 @@
+[project]
+name = "dist-sys-skill"
+version = "0.1.0"
+description = "Curriculum-aware systems design interview loop skill"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+package = false

@@ -1,0 +1,7 @@
+# generated learner work
+systems-design/*/submissions/*
+!systems-design/*/submissions/.gitkeep
+
+# python cache
+__pycache__/
+*.pyc
