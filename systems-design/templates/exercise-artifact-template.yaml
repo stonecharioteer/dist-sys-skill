@@ -1,0 +1,94 @@
+schema_version: "1.0"
+exercise_id: ex_template_name
+title: Template exercise title
+description: >
+  Write the human-facing exercise prompt here. Keep it language-agnostic and
+  scenario-driven.
+target_audience: mid
+difficulty_tier: distributed
+exercise_type: open_ended_design
+estimated_time_minutes: 45
+phases:
+  - messaging
+  - reliability
+learning_objectives:
+  - id: lo_example
+    phase: messaging
+    verb: design
+    statement: Define one measurable learning objective
+prerequisites:
+  - prerequisite concept or earlier exercise
+functional_requirements:
+  - State the core behavior the system must support
+input_constraints:
+  peak_rps: 1000
+  regions: 1
+  read_write_ratio: "4:1"
+output_constraints:
+  required_deliverables:
+    - architecture_diagram
+    - tradeoff_matrix
+    - failure_analysis
+non_functional_requirements:
+  availability_slo: "99.9%"
+  p95_latency_ms: 200
+  consistency_model: mixed
+  observability_note: Define metrics, logs, and traces expected from a strong solution
+success_criteria:
+  - criterion: States a clear acknowledgement boundary
+    weight: 25
+rubric:
+  dimensions:
+    - name: Correctness
+      description: Semantics, invariants, and edge cases
+      weight: 35
+    - name: Trade-offs
+      description: Quality of design choices under stated constraints
+      weight: 25
+    - name: Reliability
+      description: Failure handling, recovery, and degraded operation
+      weight: 20
+    - name: Observability
+      description: Signals, alerting, and debuggability
+      weight: 10
+    - name: Communication
+      description: Clarity of assumptions and deliverables
+      weight: 10
+  pass_score: 70
+hints:
+  - level: 1
+    text: Clarify one important assumption before designing
+sample_solution_outline:
+  assumptions:
+    - Put explicit assumptions here
+  architecture_summary: Summarize the likely strong solution shape
+  key_components:
+    - component A
+  critical_tradeoffs:
+    - trade-off A vs B
+  failure_handling:
+    - failure handling note
+  observability:
+    - key signal
+anti_patterns:
+  - Anti-pattern example
+  - Another common failure mode
+test_cases:
+  - id: tc_happy_path
+    type: happy_path
+    prompt: Describe one normal operating scenario
+  - id: tc_failure
+    type: failure_injection
+    prompt: Describe one failure scenario the solver must handle
+scoring_weights:
+  Correctness: 35
+  Trade-offs: 25
+  Reliability: 20
+  Observability: 10
+  Communication: 10
+quality_report:
+  schema_valid: false
+  objective_coverage_score: 0.0
+  ambiguity_count: 0
+  language_agnosticness_score: 1.0
+  surface_level_risk: medium

@@ -1,0 +1,491 @@
+schema_version: "1.0"
+source_documents:
+  - dist-sys/deep-research-report.md
+  - dist-sys/deep-research-report-2.md
+tiers:
+  - foundation
+  - applied
+  - distributed
+  - production
+phases:
+  - single_machine
+  - scalability
+  - partitioning
+  - replication_consistency
+  - messaging
+  - storage
+  - reliability
+  - observability
+  - large_scale_patterns
+exercise_types:
+  - open_ended_design
+  - focused_component_design
+  - tradeoff_analysis
+  - whiteboard_sketch
+  - implementation_agnostic_architecture_diagram
+  - fault_injection
+  - capacity_planning
+  - time_boxed_mock_interview
+exercises:
+  - number: 1
+    id: ex_in_memory_rate_limiter
+    title: "In-memory rate limiter"
+    tier: foundation
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - scalability
+    prerequisites:
+      []
+    folder: 01-in-memory-rate-limiter
+    human_doc: 01-in-memory-rate-limiter/README.md
+    agent_doc: 01-in-memory-rate-limiter/AGENT.md
+  - number: 2
+    id: ex_lru_cache
+    title: "LRU cache"
+    tier: foundation
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - storage
+    prerequisites:
+      []
+    folder: 02-lru-cache
+    human_doc: 02-lru-cache/README.md
+    agent_doc: 02-lru-cache/AGENT.md
+  - number: 3
+    id: ex_database_index_design
+    title: "Database index design for a read-heavy workload"
+    tier: foundation
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - storage
+    prerequisites:
+      []
+    folder: 03-database-index-design
+    human_doc: 03-database-index-design/README.md
+    agent_doc: 03-database-index-design/AGENT.md
+  - number: 4
+    id: ex_single_process_job_scheduler
+    title: "Single-process job scheduler"
+    tier: foundation
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - reliability
+    prerequisites:
+      []
+    folder: 04-single-process-job-scheduler
+    human_doc: 04-single-process-job-scheduler/README.md
+    agent_doc: 04-single-process-job-scheduler/AGENT.md
+  - number: 5
+    id: ex_append_only_log_crash_recovery
+    title: "Append-only log with crash recovery"
+    tier: foundation
+    exercise_type: fault_injection
+    phases:
+      - single_machine
+      - storage
+      - reliability
+    prerequisites:
+      - 4
+    folder: 05-append-only-log-crash-recovery
+    human_doc: 05-append-only-log-crash-recovery/README.md
+    agent_doc: 05-append-only-log-crash-recovery/AGENT.md
+  - number: 6
+    id: ex_single_node_kv_store
+    title: "Single-node key-value store"
+    tier: foundation
+    exercise_type: open_ended_design
+    phases:
+      - single_machine
+      - storage
+    prerequisites:
+      - 5
+    folder: 06-single-node-kv-store
+    human_doc: 06-single-node-kv-store/README.md
+    agent_doc: 06-single-node-kv-store/AGENT.md
+  - number: 7
+    id: ex_linearizable_kv_cas
+    title: "Linearizable key-value store with compare-and-set"
+    tier: foundation
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - reliability
+    prerequisites:
+      - 6
+    folder: 07-linearizable-kv-cas
+    human_doc: 07-linearizable-kv-cas/README.md
+    agent_doc: 07-linearizable-kv-cas/AGENT.md
+  - number: 8
+    id: ex_lock_lease_service
+    title: "Lock / lease service"
+    tier: applied
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - reliability
+    prerequisites:
+      - 7
+    folder: 08-lock-lease-service
+    human_doc: 08-lock-lease-service/README.md
+    agent_doc: 08-lock-lease-service/AGENT.md
+  - number: 9
+    id: ex_metadata_index_crash_recovery
+    title: "Metadata index with crash recovery"
+    tier: applied
+    exercise_type: focused_component_design
+    phases:
+      - single_machine
+      - storage
+      - reliability
+    prerequisites:
+      - 5
+      - 6
+    folder: 09-metadata-index-crash-recovery
+    human_doc: 09-metadata-index-crash-recovery/README.md
+    agent_doc: 09-metadata-index-crash-recovery/AGENT.md
+  - number: 10
+    id: ex_refactor_stateful_service_stateless
+    title: "Refactor a stateful service into a stateless service"
+    tier: applied
+    exercise_type: implementation_agnostic_architecture_diagram
+    phases:
+      - scalability
+      - reliability
+    prerequisites:
+      - 6
+    folder: 10-refactor-stateful-service-stateless
+    human_doc: 10-refactor-stateful-service-stateless/README.md
+    agent_doc: 10-refactor-stateful-service-stateless/AGENT.md
+  - number: 11
+    id: ex_load_balancing_and_autoscaling
+    title: "Load balancing and autoscaling for bursty traffic"
+    tier: applied
+    exercise_type: capacity_planning
+    phases:
+      - scalability
+      - reliability
+    prerequisites:
+      - 10
+    folder: 11-load-balancing-and-autoscaling
+    human_doc: 11-load-balancing-and-autoscaling/README.md
+    agent_doc: 11-load-balancing-and-autoscaling/AGENT.md
+  - number: 12
+    id: ex_durable_job_queue
+    title: "Durable job queue"
+    tier: applied
+    exercise_type: open_ended_design
+    phases:
+      - messaging
+      - reliability
+    prerequisites:
+      - 4
+      - 5
+      - 8
+    folder: 12-durable-job-queue
+    human_doc: 12-durable-job-queue/README.md
+    agent_doc: 12-durable-job-queue/AGENT.md
+  - number: 13
+    id: ex_mapreduce_coordinator
+    title: "MapReduce coordinator"
+    tier: applied
+    exercise_type: whiteboard_sketch
+    phases:
+      - messaging
+      - reliability
+      - scalability
+    prerequisites:
+      - 12
+    folder: 13-mapreduce-coordinator
+    human_doc: 13-mapreduce-coordinator/README.md
+    agent_doc: 13-mapreduce-coordinator/AGENT.md
+  - number: 14
+    id: ex_cache_backed_task_dispatcher
+    title: "Cache-backed task dispatcher"
+    tier: applied
+    exercise_type: open_ended_design
+    phases:
+      - scalability
+      - messaging
+      - reliability
+    prerequisites:
+      - 12
+    folder: 14-cache-backed-task-dispatcher
+    human_doc: 14-cache-backed-task-dispatcher/README.md
+    agent_doc: 14-cache-backed-task-dispatcher/AGENT.md
+  - number: 15
+    id: ex_search_index_document_retrieval
+    title: "Search index and document retrieval service"
+    tier: applied
+    exercise_type: focused_component_design
+    phases:
+      - storage
+      - scalability
+    prerequisites:
+      - 3
+      - 10
+    folder: 15-search-index-document-retrieval
+    human_doc: 15-search-index-document-retrieval/README.md
+    agent_doc: 15-search-index-document-retrieval/AGENT.md
+  - number: 16
+    id: ex_workflow_orchestration_engine
+    title: "Workflow orchestration engine"
+    tier: applied
+    exercise_type: focused_component_design
+    phases:
+      - messaging
+      - reliability
+    prerequisites:
+      - 12
+      - 13
+    folder: 16-workflow-orchestration-engine
+    human_doc: 16-workflow-orchestration-engine/README.md
+    agent_doc: 16-workflow-orchestration-engine/AGENT.md
+  - number: 17
+    id: ex_partition_key_selection_multitenant_event_platform
+    title: "Partition-key selection for a multi-tenant event platform"
+    tier: distributed
+    exercise_type: tradeoff_analysis
+    phases:
+      - partitioning
+      - messaging
+    prerequisites:
+      - 12
+    folder: 17-partition-key-selection-multitenant-event-platform
+    human_doc: 17-partition-key-selection-multitenant-event-platform/README.md
+    agent_doc: 17-partition-key-selection-multitenant-event-platform/AGENT.md
+  - number: 18
+    id: ex_consistent_hashing_distributed_cache
+    title: "Consistent hashing for a distributed cache cluster"
+    tier: distributed
+    exercise_type: focused_component_design
+    phases:
+      - partitioning
+      - scalability
+    prerequisites:
+      - 2
+      - 10
+    folder: 18-consistent-hashing-distributed-cache
+    human_doc: 18-consistent-hashing-distributed-cache/README.md
+    agent_doc: 18-consistent-hashing-distributed-cache/AGENT.md
+  - number: 19
+    id: ex_read_replicas_stale_read_mitigation
+    title: "Read replicas and stale-read mitigation"
+    tier: distributed
+    exercise_type: fault_injection
+    phases:
+      - replication_consistency
+      - reliability
+    prerequisites:
+      - 6
+      - 7
+    folder: 19-read-replicas-stale-read-mitigation
+    human_doc: 19-read-replicas-stale-read-mitigation/README.md
+    agent_doc: 19-read-replicas-stale-read-mitigation/AGENT.md
+  - number: 20
+    id: ex_idempotent_webhook_ingestion
+    title: "Idempotent webhook ingestion and processing pipeline"
+    tier: distributed
+    exercise_type: open_ended_design
+    phases:
+      - messaging
+      - reliability
+      - observability
+    prerequisites:
+      - 12
+      - 19
+    folder: 20-idempotent-webhook-ingestion
+    human_doc: 20-idempotent-webhook-ingestion/README.md
+    agent_doc: 20-idempotent-webhook-ingestion/AGENT.md
+  - number: 21
+    id: ex_scaling_consumer_groups_ordered_processing
+    title: "Scaling consumer groups for ordered event processing"
+    tier: distributed
+    exercise_type: capacity_planning
+    phases:
+      - messaging
+      - partitioning
+    prerequisites:
+      - 12
+      - 17
+    folder: 21-scaling-consumer-groups-ordered-processing
+    human_doc: 21-scaling-consumer-groups-ordered-processing/README.md
+    agent_doc: 21-scaling-consumer-groups-ordered-processing/AGENT.md
+  - number: 22
+    id: ex_fault_tolerant_kv_service
+    title: "Fault-tolerant key-value service"
+    tier: distributed
+    exercise_type: open_ended_design
+    phases:
+      - replication_consistency
+      - reliability
+      - storage
+    prerequisites:
+      - 7
+      - 19
+    folder: 22-fault-tolerant-kv-service
+    human_doc: 22-fault-tolerant-kv-service/README.md
+    agent_doc: 22-fault-tolerant-kv-service/AGENT.md
+  - number: 23
+    id: ex_sharded_rate_limiter
+    title: "Sharded rate limiter"
+    tier: distributed
+    exercise_type: whiteboard_sketch
+    phases:
+      - partitioning
+      - replication_consistency
+      - reliability
+    prerequisites:
+      - 1
+      - 17
+      - 18
+    folder: 23-sharded-rate-limiter
+    human_doc: 23-sharded-rate-limiter/README.md
+    agent_doc: 23-sharded-rate-limiter/AGENT.md
+  - number: 24
+    id: ex_tenant_isolated_durable_job_queue
+    title: "Tenant-isolated durable job queue"
+    tier: distributed
+    exercise_type: open_ended_design
+    phases:
+      - messaging
+      - partitioning
+      - reliability
+    prerequisites:
+      - 12
+      - 17
+      - 21
+    folder: 24-tenant-isolated-durable-job-queue
+    human_doc: 24-tenant-isolated-durable-job-queue/README.md
+    agent_doc: 24-tenant-isolated-durable-job-queue/AGENT.md
+  - number: 25
+    id: ex_approximate_semantic_retrieval_rag
+    title: "Approximate semantic retrieval / RAG retrieval platform"
+    tier: distributed
+    exercise_type: open_ended_design
+    phases:
+      - storage
+      - scalability
+      - observability
+      - large_scale_patterns
+    prerequisites:
+      - 15
+    folder: 25-approximate-semantic-retrieval-rag
+    human_doc: 25-approximate-semantic-retrieval-rag/README.md
+    agent_doc: 25-approximate-semantic-retrieval-rag/AGENT.md
+  - number: 26
+    id: ex_multitenant_llm_gateway_token_budget_enforcement
+    title: "Multi-tenant LLM gateway with token budget enforcement"
+    tier: production
+    exercise_type: open_ended_design
+    phases:
+      - partitioning
+      - replication_consistency
+      - reliability
+      - observability
+    prerequisites:
+      - 23
+      - 24
+    folder: 26-multitenant-llm-gateway-token-budget-enforcement
+    human_doc: 26-multitenant-llm-gateway-token-budget-enforcement/README.md
+    agent_doc: 26-multitenant-llm-gateway-token-budget-enforcement/AGENT.md
+  - number: 27
+    id: ex_conversation_memory_service
+    title: "Conversation memory service"
+    tier: production
+    exercise_type: focused_component_design
+    phases:
+      - storage
+      - reliability
+      - large_scale_patterns
+    prerequisites:
+      - 6
+      - 15
+      - 25
+    folder: 27-conversation-memory-service
+    human_doc: 27-conversation-memory-service/README.md
+    agent_doc: 27-conversation-memory-service/AGENT.md
+  - number: 28
+    id: ex_agent_workflow_orchestrator
+    title: "Agent workflow orchestrator"
+    tier: production
+    exercise_type: open_ended_design
+    phases:
+      - messaging
+      - reliability
+      - observability
+      - large_scale_patterns
+    prerequisites:
+      - 16
+      - 20
+      - 26
+    folder: 28-agent-workflow-orchestrator
+    human_doc: 28-agent-workflow-orchestrator/README.md
+    agent_doc: 28-agent-workflow-orchestrator/AGENT.md
+  - number: 29
+    id: ex_multi_tenant_feed_fan_out
+    title: "Multi-tenant feed fan-out"
+    tier: production
+    exercise_type: time_boxed_mock_interview
+    phases:
+      - large_scale_patterns
+      - storage
+      - messaging
+    prerequisites:
+      - 21
+      - 24
+    folder: 29-multi-tenant-feed-fan-out
+    human_doc: 29-multi-tenant-feed-fan-out/README.md
+    agent_doc: 29-multi-tenant-feed-fan-out/AGENT.md
+  - number: 30
+    id: ex_social_graph_edge_store_under_skew
+    title: "Social graph edge store under skew"
+    tier: production
+    exercise_type: open_ended_design
+    phases:
+      - large_scale_patterns
+      - storage
+      - partitioning
+    prerequisites:
+      - 15
+      - 17
+      - 18
+      - 29
+    folder: 30-social-graph-edge-store-under-skew
+    human_doc: 30-social-graph-edge-store-under-skew/README.md
+    agent_doc: 30-social-graph-edge-store-under-skew/AGENT.md
+  - number: 31
+    id: ex_reconfigurable_sharded_kv_service
+    title: "Reconfigurable sharded key-value service"
+    tier: production
+    exercise_type: time_boxed_mock_interview
+    phases:
+      - partitioning
+      - replication_consistency
+      - reliability
+      - observability
+    prerequisites:
+      - 22
+      - 23
+    folder: 31-reconfigurable-sharded-kv-service
+    human_doc: 31-reconfigurable-sharded-kv-service/README.md
+    agent_doc: 31-reconfigurable-sharded-kv-service/AGENT.md
+  - number: 32
+    id: ex_geo_replicated_control_plane
+    title: "Geo-replicated control plane"
+    tier: production
+    exercise_type: time_boxed_mock_interview
+    phases:
+      - replication_consistency
+      - reliability
+      - observability
+      - large_scale_patterns
+    prerequisites:
+      - 26
+      - 31
+    folder: 32-geo-replicated-control-plane
+    human_doc: 32-geo-replicated-control-plane/README.md
+    agent_doc: 32-geo-replicated-control-plane/AGENT.md

@@ -1,0 +1,42 @@
+schema_version: "1.0"
+language_scope: agnostic
+target_audience: mid
+learning_phase_focus:
+  - messaging
+  - reliability
+concept_focus:
+  - idempotency
+  - retries
+  - observability
+requested_exercise_types:
+  - open_ended_design
+difficulty_tier: distributed
+count: 1
+time_box_minutes: 45
+cohort_context:
+  cohort_size: null
+  delivery_platform: self_study
+  prior_topics:
+    - queues
+    - basic persistence
+constraints:
+  users: 100000
+  peak_rps: 5000
+  regions: 1
+  availability_slo: "99.9%"
+  p95_latency_ms: 250
+  data_retention_days: 30
+  consistency_preference: mixed
+curriculum_state:
+  covered_objectives:
+    - local durability
+    - basic retries
+  avoid_duplicate_templates: true
+quality_gates:
+  require_failure_mode: true
+  require_tradeoff_matrix: true
+  require_observability: true
+  require_capacity_math: true
+  require_sample_solution: true
+  forbid_language_specific_terms: true
+  max_ambiguity_markers: 2

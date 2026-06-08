@@ -1,0 +1,8 @@
+curriculum: dist-sys
+exercise_number: {{exercise_number}}
+exercise_title: {{exercise_title}}
+attempt_id: {{attempt_id}}
+date: {{date}}
+status: in_progress
+review_status: not_reviewed
+assets: []

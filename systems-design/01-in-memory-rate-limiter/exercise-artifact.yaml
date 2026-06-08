@@ -1,0 +1,134 @@
+schema_version: "1.0"
+exercise_id: ex_in_memory_rate_limiter
+title: In-memory rate limiter
+description: >
+  Design a single-process, in-memory rate limiter for a public API. The system
+  must enforce per-key limits with clear allow/deny semantics, bounded memory
+  growth, and predictable behavior under bursty traffic and hot keys. Treat the
+  limiter as an in-process component used by request-handling code, not as a
+  separate HTTP service. This is a local systems-design exercise: do not
+  distribute the limiter or depend on an external coordination service as part
+  of the core answer.
+target_audience: beginner
+difficulty_tier: foundation
+exercise_type: focused_component_design
+estimated_time_minutes: 30
+phases:
+  - single_machine
+  - scalability
+learning_objectives:
+  - id: lo_choose_algorithm
+    phase: single_machine
+    verb: compare
+    statement: Compare local rate-limiting algorithms and justify one against a bursty workload
+  - id: lo_model_state
+    phase: single_machine
+    verb: design
+    statement: Design bounded per-key state and cleanup behavior for a large active-key set
+  - id: lo_reason_hotspots
+    phase: scalability
+    verb: identify
+    statement: Identify hot-key contention points and local bottlenecks in the request path
+  - id: lo_operational_signals
+    phase: scalability
+    verb: explain
+    statement: Explain which metrics and signals are needed to operate and debug the limiter
+prerequisites: []
+functional_requirements:
+  - Support in-process request admission checks per API key
+  - Return an allow or deny decision with enough information for the calling code to explain the outcome
+  - Maintain independent limits for many concurrent active keys
+  - Prevent unbounded state growth from idle or one-off keys
+  - Support one clearly defined policy such as requests per time window or token refill rate
+input_constraints:
+  users: 100000
+  peak_rps: 20000
+  working_set_gb: 0.5
+output_constraints:
+  required_deliverables:
+    - architecture_diagram
+    - read_write_path
+    - tradeoff_matrix
+    - observability_plan
+  forbidden_content:
+    - distributed-system design as the primary solution
+    - provider-specific infrastructure dependencies
+    - language-specific code as the main answer
+non_functional_requirements:
+  p95_latency_ms: 2
+  throughput_rps: 20000
+  durability: best_effort
+  consistency_model: strong
+  observability_note: >
+    The answer should define at least a minimal metric set for allow/deny rates,
+    state growth, hot-key skew, and limiter latency.
+success_criteria:
+  - criterion: Chooses one algorithm and defines exact allow or deny semantics
+    weight: 25
+  - criterion: Explains per-key state shape and how stale keys leave memory
+    weight: 20
+  - criterion: Discusses hot-key contention and local complexity costs
+    weight: 20
+  - criterion: States what happens on process restart and why that is acceptable or not
+    weight: 15
+  - criterion: Names useful operational signals for debugging and sizing
+    weight: 20
+rubric:
+  dimensions:
+    - name: Correctness
+      description: Semantic precision, edge cases, and internal consistency
+      weight: 35
+    - name: Trade-offs
+      description: Algorithm choice and rejected alternatives under the stated workload
+      weight: 25
+    - name: Capacity reasoning
+      description: Memory, update cost, and hot-key bottleneck awareness
+      weight: 20
+    - name: Reliability
+      description: Restart behavior and cleanup or degradation discussion
+      weight: 10
+    - name: Communication
+      description: Clarity of assumptions and explanation
+      weight: 10
+  pass_score: 70
+hints:
+  - level: 1
+    text: Start by deciding what data must be updated on every request for one key.
+  - level: 2
+    text: Compare your chosen algorithm against at least one rejected alternative on memory and burst handling.
+  - level: 3
+    text: If the limiter restarts and loses all counters, decide whether that is acceptable for this exercise and state it clearly.
+sample_solution_outline:
+  withheld: true
+anti_patterns:
+  - Names an algorithm without defining its boundary semantics
+  - Ignores stale-key cleanup and memory growth
+  - Assumes uniform traffic and never discusses hot keys
+  - Gives a distributed solution to a single-process exercise
+  - Claims exact fairness without showing the mechanism
+  - Omits restart behavior entirely
+test_cases:
+  - id: tc_happy_path
+    type: happy_path
+    prompt: A moderate number of active keys each sends requests comfortably below the limit
+  - id: tc_edge_boundary
+    type: edge_case
+    prompt: One key sends requests exactly at the configured boundary of the chosen algorithm
+  - id: tc_hot_key_burst
+    type: capacity
+    prompt: A single key becomes extremely hot while many cold keys remain active
+  - id: tc_restart
+    type: operability
+    prompt: The process restarts during active traffic and all in-memory state is lost
+scoring_weights:
+  Correctness: 35
+  Trade-offs: 25
+  Capacity reasoning: 20
+  Reliability: 10
+  Communication: 10
+quality_report:
+  schema_valid: true
+  objective_coverage_score: 1.0
+  ambiguity_count: 1
+  language_agnosticness_score: 1.0
+  surface_level_risk: low
