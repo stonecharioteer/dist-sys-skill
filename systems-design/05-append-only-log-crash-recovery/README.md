@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `found
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: useful background for append-only structures and recovery trade-offs.
 - PostgreSQL documentation — **Write-Ahead Logging (WAL)**: https://www.postgresql.org/docs/current/wal-intro.html
   - Why: concrete and trustworthy example of durable append-first thinking.
 
 ### Optional (10–15 minutes)
+
 - PostgreSQL documentation — **Introduction to MVCC**: https://www.postgresql.org/docs/current/mvcc-intro.html
   - Why: helpful if you want more intuition about durable state and visibility.
 
 ### Enough for today when you understand
+
 - what an acknowledgment means for durability
 - why partial writes and tail corruption matter
 - why replay logic is part of the design, not an afterthought
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution is explicit about when writes are acknowledged, how partial reco
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

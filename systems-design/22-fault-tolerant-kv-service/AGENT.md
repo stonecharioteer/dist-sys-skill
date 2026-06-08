@@ -40,7 +40,6 @@ Recommended future checks:
 - Prefer contract tests, trace replay, and rubric checks over framework-specific implementation requirements.
 - Keep room for multiple valid designs when the exercise is intentionally open-ended.
 
-
 ## Session control contract
 
 This exercise participates in the curriculum-wide session workflow in [`../WORKFLOW.md`](../WORKFLOW.md).

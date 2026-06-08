@@ -35,8 +35,7 @@ exercises:
     phases:
       - single_machine
       - scalability
-    prerequisites:
-      []
+    prerequisites: []
     folder: 01-in-memory-rate-limiter
     human_doc: 01-in-memory-rate-limiter/README.md
     agent_doc: 01-in-memory-rate-limiter/AGENT.md
@@ -48,8 +47,7 @@ exercises:
     phases:
       - single_machine
       - storage
-    prerequisites:
-      []
+    prerequisites: []
     folder: 02-lru-cache
     human_doc: 02-lru-cache/README.md
     agent_doc: 02-lru-cache/AGENT.md
@@ -61,8 +59,7 @@ exercises:
     phases:
       - single_machine
       - storage
-    prerequisites:
-      []
+    prerequisites: []
     folder: 03-database-index-design
     human_doc: 03-database-index-design/README.md
     agent_doc: 03-database-index-design/AGENT.md
@@ -74,8 +71,7 @@ exercises:
     phases:
       - single_machine
       - reliability
-    prerequisites:
-      []
+    prerequisites: []
     folder: 04-single-process-job-scheduler
     human_doc: 04-single-process-job-scheduler/README.md
     agent_doc: 04-single-process-job-scheduler/AGENT.md

@@ -18,16 +18,17 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 6, **Partitioning**
+
+- _Designing Data-Intensive Applications_ — Chapter 6, **Partitioning**
   - Why: this is the chapter for partition-key reasoning, skew, and movement cost.
 - PostgreSQL documentation — **Table Partitioning**: https://www.postgresql.org/docs/current/ddl-partitioning.html
   - Why: practical complement to abstract partitioning trade-offs.
 
 ### Enough for today when you understand
+
 - why partition keys encode trade-offs, not just hashing choices
 - why skew matters as much as average distribution
 - why rebalancing cost belongs in the first design, not later
-
 
 ## What to build
 
@@ -44,7 +45,6 @@ A good solution compares keys, models skew, and explains migration/rebalancing c
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

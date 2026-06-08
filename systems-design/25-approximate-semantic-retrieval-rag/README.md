@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: still the right chapter for indexing and retrieval-path thinking.
 - Google Research — **The Tail at Scale**: https://research.google/pubs/the-tail-at-scale/
   - Why: great reading for why retrieval latency distributions matter.
 
 ### Optional (10–15 minutes)
+
 - OpenTelemetry docs — **Signals**: https://opentelemetry.io/docs/concepts/signals/
   - Why: useful if you want better operational vocabulary for retrieval observability.
 
 ### Enough for today when you understand
+
 - why retrieval freshness and retrieval latency are both system properties
 - why approximate retrieval needs observability, not just intuition
 - why query fanout can dominate p95/p99 behavior
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution separates ingestion from serving, addresses freshness lag, and d
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

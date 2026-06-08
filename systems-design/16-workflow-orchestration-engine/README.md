@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: strong background for stepwise, durable work execution.
 - Martin Fowler — **Circuit Breaker**: https://martinfowler.com/bliki/CircuitBreaker.html
   - Why: useful as a small operational reading about failure control in multi-step systems.
 
 ### Optional (10–15 minutes)
+
 - AWS Builders’ Library — **Timeouts, retries, and backoff with jitter**: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
   - Why: practical companion for step retries and failure handling.
 
 ### Enough for today when you understand
+
 - why workflow state must be explicit
 - why retries and compensation are design choices, not patch-ups
 - why long-running work needs visibility
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution defines workflow state, step idempotency expectations, and what 
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

@@ -24,12 +24,12 @@ Realistic exercises also need realistic traffic, data, and failure pressure. YCS
 
 The table below synthesizes that evidence into a practical progression for exercise generation. It combines MIT’s lab sequence, SEI’s scenario-based architecture evaluation, and educational scaffolding results into four tiers that an exercise-generation agent can target. citeturn9view0turn11view0turn11view1turn11view2turn11view3turn36view0turn36view2turn29view0turn30view0
 
-| Difficulty tier | Typical environment | Learning objectives and concepts | Representative example problems |
-|---|---|---|---|
-| Foundation | Single node, one process or one host | API semantics, state machines, idempotency, at-most-once behavior, linearizability, local durability, basic capacity and observability reasoning | Linearizable KV + lock service; metadata index with crash recovery |
-| Intermediate | Coordinator + workers, or 3-node replicated cluster | Task scheduling, leases, retries, timeouts, visibility windows, failure detection, backpressure, degraded behavior | Durable job queue; MapReduce coordinator; cache-backed task dispatcher |
-| Advanced | 3–9 nodes, sharded or replicated partitions | Consensus-backed replication, quorums, sharding, hot-key mitigation, tail-latency management, SLO-aware trade-offs | Fault-tolerant KV service; sharded rate limiter; multi-tenant feed fan-out |
-| Expert | Multi-shard and/or multi-region, reconfiguration during load | Dynamic shard movement, workload isolation, multi-region consistency, migration safety, fault injection, formal invariants, blast-radius control | Reconfigurable sharded KV; social graph edge store; geo-replicated control plane |
+| Difficulty tier | Typical environment                                          | Learning objectives and concepts                                                                                                                 | Representative example problems                                                  |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Foundation      | Single node, one process or one host                         | API semantics, state machines, idempotency, at-most-once behavior, linearizability, local durability, basic capacity and observability reasoning | Linearizable KV + lock service; metadata index with crash recovery               |
+| Intermediate    | Coordinator + workers, or 3-node replicated cluster          | Task scheduling, leases, retries, timeouts, visibility windows, failure detection, backpressure, degraded behavior                               | Durable job queue; MapReduce coordinator; cache-backed task dispatcher           |
+| Advanced        | 3–9 nodes, sharded or replicated partitions                  | Consensus-backed replication, quorums, sharding, hot-key mitigation, tail-latency management, SLO-aware trade-offs                               | Fault-tolerant KV service; sharded rate limiter; multi-tenant feed fan-out       |
+| Expert          | Multi-shard and/or multi-region, reconfiguration during load | Dynamic shard movement, workload isolation, multi-region consistency, migration safety, fault injection, formal invariants, blast-radius control | Reconfigurable sharded KV; social graph edge store; geo-replicated control plane |
 
 This tiering should not be treated as merely “more scale.” It is a progression from **local semantics** to **distributed agreement** to **distribution under skew** to **change under failure**. That mirrors how Bigtable and Dynamo expose different partitioning and consistency choices, how Raft structures replicated state, and how social-graph benchmarks reveal hot-spot behavior that small uniform workloads hide. citeturn33view1turn33view0turn33view7turn23view0turn24search1
 
@@ -55,16 +55,16 @@ flowchart TD
 
 A strong specification should make the following modules mandatory.
 
-| Module | Must include | Why it matters |
-|---|---|---|
-| Scenario and scope | user story, system boundary, success definition, explicit non-goals | Prevents shallow “design everything” responses and forces problem framing |
-| Learning objectives | 3–6 targeted skills, prerequisite concepts, tier | Lets the agent generate the right complexity and lets the grader score the intended skills |
-| Protocol/operation contract | operations, request/response shapes, ordering expectations, retry semantics, idempotency keys, pagination or leasing rules | Makes the exercise language-agnostic while still precise about behavior |
-| Behavioral semantics | invariants, consistency model, failure model, durability expectations, clock/network assumptions | Prevents hand-wavy answers and enables correctness review |
-| Workload model | dataset size, access distribution, hot-set skew, read/write/scan mix, burst profile, multi-tenant mix, replay traces | Forces real capacity and partitioning decisions |
-| Environment | CPU/memory/storage/network budgets, topology, allowed services, scaling stages | Keeps design choices comparable across candidates |
-| Deliverables | architecture diagram, sequence diagram, data/partitioning plan, capacity model, trade-off memo, incident/failure analysis | Evaluates design thinking, not implementation trivia |
-| Evaluation | automated thresholds, correctness checks, human rubric, penalties, hint policy | Makes scoring repeatable and auditable |
+| Module                      | Must include                                                                                                               | Why it matters                                                                             |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Scenario and scope          | user story, system boundary, success definition, explicit non-goals                                                        | Prevents shallow “design everything” responses and forces problem framing                  |
+| Learning objectives         | 3–6 targeted skills, prerequisite concepts, tier                                                                           | Lets the agent generate the right complexity and lets the grader score the intended skills |
+| Protocol/operation contract | operations, request/response shapes, ordering expectations, retry semantics, idempotency keys, pagination or leasing rules | Makes the exercise language-agnostic while still precise about behavior                    |
+| Behavioral semantics        | invariants, consistency model, failure model, durability expectations, clock/network assumptions                           | Prevents hand-wavy answers and enables correctness review                                  |
+| Workload model              | dataset size, access distribution, hot-set skew, read/write/scan mix, burst profile, multi-tenant mix, replay traces       | Forces real capacity and partitioning decisions                                            |
+| Environment                 | CPU/memory/storage/network budgets, topology, allowed services, scaling stages                                             | Keeps design choices comparable across candidates                                          |
+| Deliverables                | architecture diagram, sequence diagram, data/partitioning plan, capacity model, trade-off memo, incident/failure analysis  | Evaluates design thinking, not implementation trivia                                       |
+| Evaluation                  | automated thresholds, correctness checks, human rubric, penalties, hint policy                                             | Makes scoring repeatable and auditable                                                     |
 
 The **behavioral semantics** section is the difference between a design exercise and “surface-level JSON munging.” It should ask for invariants such as “an acknowledged enqueue is never lost,” “at most one shard group serves a shard at one epoch,” or “a successful Put is visible to subsequent non-concurrent Gets.” This follows the same logic behind linearizability, consensus protocols, and TLA+-style design reviews: if the behavior cannot be stated precisely, it is difficult to evaluate architecture choices rigorously. citeturn33view9turn33view7turn17search12turn35view6
 
@@ -78,11 +78,11 @@ The format choice should follow function, not fashion. **JSON** is the best defa
 
 The comparison below is the practical trade-off table I would hand to the agent-platform designer.
 
-| Option | Strengths | Weaknesses | Best use |
-|---|---|---|---|
-| JSON + JSON Schema | Best interoperability; trivial for agents and harnesses; easy diffing and storage; strong validator ecosystem | Verbose; weak for cross-field semantic constraints unless extended; behavior still needs a separate invariant block | Canonical authoring and interchange format |
-| Protobuf | Strong typing; compact transport; versioning discipline; better for long-lived internal APIs | Less human-readable; weaker for ad hoc editing and prompt authoring; awkward for rich text and nested policy comments | Internal service-to-service exchange, cached compiled form |
-| DSL via CUE | Excellent for constraints, reuse, and policy overlays; validates multiple data formats; concise | Higher learning curve; smaller ecosystem than JSON; may need translation layer for some agent stacks | Validation overlay, configuration policy, complex cross-field constraints |
+| Option             | Strengths                                                                                                     | Weaknesses                                                                                                            | Best use                                                                  |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| JSON + JSON Schema | Best interoperability; trivial for agents and harnesses; easy diffing and storage; strong validator ecosystem | Verbose; weak for cross-field semantic constraints unless extended; behavior still needs a separate invariant block   | Canonical authoring and interchange format                                |
+| Protobuf           | Strong typing; compact transport; versioning discipline; better for long-lived internal APIs                  | Less human-readable; weaker for ad hoc editing and prompt authoring; awkward for rich text and nested policy comments | Internal service-to-service exchange, cached compiled form                |
+| DSL via CUE        | Excellent for constraints, reuse, and policy overlays; validates multiple data formats; concise               | Higher learning curve; smaller ecosystem than JSON; may need translation layer for some agent stacks                  | Validation overlay, configuration policy, complex cross-field constraints |
 
 For most teams, the highest-leverage pattern is: **author canonical exercise specs in JSON**, **validate with JSON Schema or CUE**, and **optionally emit Protobuf mirrors** for transport-heavy systems. Put protocol behavior in fields like `consistency_model`, `invariants`, `history_oracle`, and `failure_schedule`; do not hide behavior inside prose. This mirrors how modern cloud guidance separates operational objectives, architecture decisions, and consistency semantics, and it is consistent with formal-methods practice at AWS and Microsoft. citeturn34view1turn34view2turn17search12turn35view6
 
@@ -134,8 +134,8 @@ A minimal machine-consumable exercise template instance can look like this:
     "operations": [
       {
         "name": "OperationName",
-        "request": {"fields": []},
-        "response": {"fields": []},
+        "request": { "fields": [] },
+        "response": { "fields": [] },
         "notes": "Ordering, idempotency, pagination, leasing, etc."
       }
     ],
@@ -146,15 +146,8 @@ A minimal machine-consumable exercise template instance can look like this:
   },
   "behavior": {
     "consistency_model": "linearizable|session|eventual|custom",
-    "invariants": [
-      "Invariant sentence"
-    ],
-    "failure_model": [
-      "node crash",
-      "network delay",
-      "partition",
-      "clock skew"
-    ],
+    "invariants": ["Invariant sentence"],
+    "failure_model": ["node crash", "network delay", "partition", "clock skew"],
     "durability": "What acknowledgement means"
   },
   "workload": {
@@ -165,7 +158,7 @@ A minimal machine-consumable exercise template instance can look like this:
     "traffic": {
       "baseline_rps": 1000,
       "peak_multiplier": 10,
-      "mix": {"reads": 0.8, "writes": 0.2},
+      "mix": { "reads": 0.8, "writes": 0.2 },
       "distribution": "uniform|zipf|pareto|trace-replay",
       "hotset_fraction": 0.01
     }
@@ -218,14 +211,14 @@ The harness should combine **correctness checks**, **performance/load checks**, 
 
 A practical scoring rubric is below. I recommend keeping the weights stable across exercises so that learners can compare progress over time.
 
-| Dimension | Automated evidence | Human evidence | Suggested weight |
-|---|---|---|---|
-| Semantic correctness | invariant checks, history replay, expected outputs, stale-read or duplicate-rate bounds | correctness of guarantees stated and defended | 35% |
-| Performance and capacity | p50/p95/p99 latency, throughput, queue depth, consumer lag, storage growth | realism of capacity model and bottleneck analysis | 20% |
-| Resilience | crash/partition/restart results, recovery time, degraded mode behavior | failure-mode coverage, blast-radius reasoning | 15% |
-| Trade-off quality | threshold pass/fail under conflicting constraints | quality of choices around consistency, cost, latency, complexity | 15% |
-| Operability | alert thresholds, metric coverage, incident affordances | observability, runbook readiness, rollback/change strategy | 10% |
-| Communication quality | n/a or lightweight format checks | clarity of diagrams, assumptions, and decision records | 5% |
+| Dimension                | Automated evidence                                                                      | Human evidence                                                   | Suggested weight |
+| ------------------------ | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------- |
+| Semantic correctness     | invariant checks, history replay, expected outputs, stale-read or duplicate-rate bounds | correctness of guarantees stated and defended                    | 35%              |
+| Performance and capacity | p50/p95/p99 latency, throughput, queue depth, consumer lag, storage growth              | realism of capacity model and bottleneck analysis                | 20%              |
+| Resilience               | crash/partition/restart results, recovery time, degraded mode behavior                  | failure-mode coverage, blast-radius reasoning                    | 15%              |
+| Trade-off quality        | threshold pass/fail under conflicting constraints                                       | quality of choices around consistency, cost, latency, complexity | 15%              |
+| Operability              | alert thresholds, metric coverage, incident affordances                                 | observability, runbook readiness, rollback/change strategy       | 10%              |
+| Communication quality    | n/a or lightweight format checks                                                        | clarity of diagrams, assumptions, and decision records           | 5%               |
 
 This rubric is intentionally asymmetric. Architecture evaluation methods and formal-correctness practice both imply that a beautifully explained but behaviorally wrong design should not score well; semantic and quality-attribute correctness must dominate. At the same time, SLOs and overload handling should be visible in the scoring because real systems are judged by user experience, not just by internal elegance. citeturn36view2turn36view4turn33view9turn35view7turn35view8turn35view9
 
@@ -308,11 +301,17 @@ The following is a concrete, agent-consumable instance for this exercise.
   },
   "system_contract": {
     "operations": [
-      {"name": "Enqueue", "notes": "Returns job_id after durable acceptance."},
-      {"name": "Lease", "notes": "Returns visible jobs and lease deadline."},
-      {"name": "Ack", "notes": "Marks a leased job completed."},
-      {"name": "Nack", "notes": "Requests early retry."},
-      {"name": "MoveToDLQ", "notes": "Triggered after bounded attempts or poison classification."}
+      {
+        "name": "Enqueue",
+        "notes": "Returns job_id after durable acceptance."
+      },
+      { "name": "Lease", "notes": "Returns visible jobs and lease deadline." },
+      { "name": "Ack", "notes": "Marks a leased job completed." },
+      { "name": "Nack", "notes": "Requests early retry." },
+      {
+        "name": "MoveToDLQ",
+        "notes": "Triggered after bounded attempts or poison classification."
+      }
     ],
     "sla": {
       "availability": "99.9%",

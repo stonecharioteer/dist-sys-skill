@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `found
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 2, **Data Models and Query Languages**
+
+- _Designing Data-Intensive Applications_ — Chapter 2, **Data Models and Query Languages**
   - Why: helps you decide what your key-value interface is really promising.
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: gives the right storage/index/durability background for a local KV design.
 
 ### Optional (10–15 minutes)
+
 - PostgreSQL documentation — **Write-Ahead Logging (WAL)**: https://www.postgresql.org/docs/current/wal-intro.html
   - Why: nice concrete example of durable-write sequencing.
 
 ### Enough for today when you understand
+
 - the difference between API semantics and storage layout
 - why a KV store still needs a recovery story
 - what “single-node” does and does not simplify
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution describes the write path, storage/index layout, compaction or cl
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

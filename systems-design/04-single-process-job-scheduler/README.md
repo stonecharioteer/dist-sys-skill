@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `found
 ## Prep reading
 
 ### Required (about 35–50 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 1, **Reliable, Scalable, and Maintainable Applications**
+
+- _Designing Data-Intensive Applications_ — Chapter 1, **Reliable, Scalable, and Maintainable Applications**
   - Why: gives a good framing for local reliability, workload, and failure handling.
 - Google SRE book — **Handling Overload**: https://sre.google/sre-book/handling-overload/
   - Why: helps you think about queues, saturation, and backpressure before distribution enters the picture.
 
 ### Optional (10–15 minutes)
+
 - AWS Builders’ Library — **Using load shedding to avoid overload**: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
   - Why: practical companion to overload and bounded work.
 
 ### Enough for today when you understand
+
 - why a scheduler needs a state machine for jobs
 - why retries and poison jobs change the design
 - why bounded concurrency matters even on one machine
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution defines job states, retry rules, fairness under one process, and
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

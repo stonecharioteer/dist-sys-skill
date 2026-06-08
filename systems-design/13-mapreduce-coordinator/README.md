@@ -18,16 +18,17 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 10, **Batch Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 10, **Batch Processing**
   - Why: gives the right mental model for staged work and coordinator responsibilities.
 - Google Research — **MapReduce: Simplified Data Processing on Large Clusters**: https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/
   - Why: canonical reference for the problem shape you are modeling.
 
 ### Enough for today when you understand
+
 - why coordinators assign and reassign work
 - why task completion needs explicit bookkeeping
 - what worker failure changes in a staged job system
-
 
 ## What to build
 
@@ -44,7 +45,6 @@ A good solution defines assignment, timeout, completion, and duplicate-work hand
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

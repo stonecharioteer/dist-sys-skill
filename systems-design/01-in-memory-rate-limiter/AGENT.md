@@ -155,7 +155,6 @@ If implementation tracks are added later, a good shape is:
 - Prefer validating declared semantics over forcing a hidden “correct” algorithm.
 - Keep the exercise small and local; do not accidentally upgrade it into a distributed rate-limiter problem.
 
-
 ## Session control contract
 
 This exercise participates in the curriculum-wide session workflow in [`../WORKFLOW.md`](../WORKFLOW.md).

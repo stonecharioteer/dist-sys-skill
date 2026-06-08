@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 35–50 minutes total)
+
 - Google SRE book — **Handling Overload**: https://sre.google/sre-book/handling-overload/
   - Why: directly useful for burst handling and headroom thinking.
 - AWS Builders’ Library — **Using load shedding to avoid overload**: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
   - Why: concrete guidance on protecting a service under stress.
 
 ### Optional (10–15 minutes)
+
 - AWS Builders’ Library — **Timeouts, retries, and backoff with jitter**: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
   - Why: complements scaling by showing how clients can amplify overload.
 
 ### Enough for today when you understand
+
 - why average load is not enough for planning
 - why headroom and reaction lag matter
 - why autoscaling still needs overload behavior defined up front
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution quantifies headroom, scale-up lag, queueing or shedding behavior
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

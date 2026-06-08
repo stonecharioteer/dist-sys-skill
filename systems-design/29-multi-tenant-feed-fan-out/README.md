@@ -18,16 +18,17 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: good background for fanout pipelines and asynchronous serving.
 - Google Research — **The Tail at Scale**: https://research.google/pubs/the-tail-at-scale/
   - Why: feed systems are dominated by skew and tail latency.
 
 ### Enough for today when you understand
+
 - why fanout strategy is workload-dependent
 - why celebrity skew changes everything
 - why cache warmth and backfill behavior belong in the initial design
-
 
 ## What to build
 
@@ -44,7 +45,6 @@ A good solution chooses a fan-out strategy, models hot publishers, and explains 
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

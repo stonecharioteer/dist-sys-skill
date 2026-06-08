@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `found
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 9, **Consistency and Consensus**
+
+- _Designing Data-Intensive Applications_ — Chapter 9, **Consistency and Consensus**
   - Why: this is the cleanest way to ground yourself in linearizability and compare-and-set semantics.
 - Raft site: https://raft.github.io/
   - Why: useful for building an intuition that correctness comes from explicit state transitions and guarantees.
 
 ### Optional (10–15 minutes)
+
 - PostgreSQL documentation — **Introduction to MVCC**: https://www.postgresql.org/docs/current/mvcc-intro.html
   - Why: helps contrast local visibility semantics with stronger single-copy reasoning.
 
 ### Enough for today when you understand
+
 - what linearizability is trying to guarantee
 - why CAS is more than “read, then write”
 - why retry behavior changes correctness arguments
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution makes concurrent operation ordering and failed CAS behavior expl
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

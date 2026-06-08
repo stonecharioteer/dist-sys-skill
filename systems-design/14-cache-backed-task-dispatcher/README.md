@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: useful for separating durable state from fast-path dispatch.
 - AWS Builders’ Library — **Timeouts, retries, and backoff with jitter**: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
   - Why: practical background for dispatch, retries, and failure behavior.
 
 ### Optional (10–15 minutes)
+
 - Google SRE book — **Handling Overload**: https://sre.google/sre-book/handling-overload/
   - Why: useful if you want to think harder about burst handling and backpressure.
 
 ### Enough for today when you understand
+
 - why cached state should not silently replace durable truth
 - how retries and stale cache entries can interact badly
 - why degraded behavior should be designed intentionally
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution states when cached state is authoritative, when it is advisory, 
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

@@ -18,7 +18,8 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 6, **Partitioning**
+
+- _Designing Data-Intensive Applications_ — Chapter 6, **Partitioning**
   - Why: strong base for skew and placement reasoning.
 - Google Research — **Bigtable: A Distributed Storage System for Structured Data**: https://research.google/pubs/bigtable-a-distributed-storage-system-for-structured-data/
   - Why: useful for thinking about large structured stores under skewed access.
@@ -26,10 +27,10 @@ This exercise exists to strengthen the step from the previous topics into `produ
   - Why: hot nodes and range scans are tail-latency problems.
 
 ### Enough for today when you understand
+
 - why average-degree reasoning hides the hard cases
 - why partitioning must acknowledge power-law skew
 - why scan behavior and hot-node behavior cannot be separated
-
 
 ## What to build
 
@@ -46,7 +47,6 @@ A good solution explains partitioning for hot nodes, scan pagination, cache stra
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

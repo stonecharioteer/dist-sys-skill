@@ -18,16 +18,17 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 35–50 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 6, **Partitioning**
+
+- _Designing Data-Intensive Applications_ — Chapter 6, **Partitioning**
   - Why: gives the right background for distribution and movement cost.
 - Wikipedia — **Consistent hashing**: https://en.wikipedia.org/wiki/Consistent_hashing
   - Why: quick and adequate introduction to the core placement idea.
 
 ### Enough for today when you understand
+
 - why node membership changes are expensive without good placement strategy
 - what consistent hashing is trying to minimize
 - why skew and hot keys still matter even with elegant hashing
-
 
 ## What to build
 
@@ -44,7 +45,6 @@ A good solution explains placement, virtual nodes or equivalents, and behavior d
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

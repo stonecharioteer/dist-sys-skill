@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `found
 ## Prep reading
 
 ### Required (about 35–50 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: frames local data-structure trade-offs and lookup-path costs.
 - Wikipedia — **Cache replacement policies**: https://en.wikipedia.org/wiki/Cache_replacement_policies
   - Why: gives the shortest reliable overview of LRU and related eviction strategies.
 
 ### Optional (10–15 minutes)
+
 - Redis documentation — **Key eviction**: https://redis.io/docs/latest/develop/reference/eviction/
   - Why: helps you see how eviction policy shows up in a real cache system.
 
 ### Enough for today when you understand
+
 - why LRU needs both fast lookup and fast recency updates
 - what eviction policy means operationally
 - why a cache can be locally correct yet still ineffective if hit rates are poor
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution explains data structures, eviction complexity, stale-entry handl
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

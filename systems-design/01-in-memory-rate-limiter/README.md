@@ -49,7 +49,8 @@ This is intentionally a **single-process, in-memory** design exercise. Do not di
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: gives you the right local-systems mental model for in-memory structures, logs, and performance trade-offs.
 - Wikipedia — **Rate limiting**: https://en.wikipedia.org/wiki/Rate_limiting
   - Why: quick orientation to the problem space and common policy shapes.
@@ -57,14 +58,15 @@ This is intentionally a **single-process, in-memory** design exercise. Do not di
   - Why: useful contrast against the simpler first design you might choose here.
 
 ### Optional (10–15 minutes)
+
 - AWS Builders’ Library — **Using load shedding to avoid overload**: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
   - Why: connects local admission control to real overload handling.
 
 ### Enough for today when you understand
+
 - why a limiter is an admission-control component
 - the difference between a simple windowed design and token-bucket-style reasoning
 - why this exercise stays single-process and in-memory
-
 
 ## What to build
 
@@ -177,12 +179,15 @@ Watch out for these:
 ## Hints
 
 ### Hint 1
+
 Think first about what data must be updated on every request for one key.
 
 ### Hint 2
+
 If two algorithms both work, compare them on memory cost, burst smoothing, and implementation complexity.
 
 ### Hint 3
+
 The best first answer is usually not the most sophisticated one; it is the one whose semantics and costs are easiest to explain clearly.
 
 ## How to use this exercise
@@ -196,7 +201,6 @@ Try answering in this order:
 5. discuss hot keys, complexity, and observability
 
 If you later implement this in a language, keep the implementation aligned with the behavior contract you designed here.
-
 
 ## Interactive study loop
 

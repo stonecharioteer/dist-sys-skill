@@ -27,36 +27,43 @@ Examples:
 ## Command semantics
 
 ### `dist-sys ls [attempted|pending]`
+
 - show a curriculum-wide summary with attempt counts
 - optionally filter to attempted or pending work
 - use `python3 dist-sys/systems-design/scripts/dist_sys_status.py ls ...` as the canonical helper
 
 ### `dist-sys next`
+
 - recommend the next exercise to work on
 - prefer unfinished work, then unreviewed work, then the first untouched exercise whose prerequisites are reasonably satisfied
 - if there are multiple good next choices, provide alternatives and explain the trade-off in choosing among them
 - use `python3 dist-sys/systems-design/scripts/dist_sys_status.py next` as the canonical helper
 
 ### `dist-sys <n> start`
+
 - start the guided chat loop for exercise `<n>`
 - if there is an unfinished active attempt, resume it
 - otherwise create a new attempt and begin questioning
 - frame the problem first like a mock interviewer before drilling into sub-questions
 
 ### `dist-sys <n> new`
+
 - always create a new attempt for exercise `<n>`
 - begin a fresh guided chat loop
 - present the exercise as a mock interview prompt before asking the first question
 
 ### `dist-sys <n> list`
+
 - list previous attempts for exercise `<n>`
 - show date, attempt id, and review status
 
 ### `dist-sys <n> review`
+
 - review the latest or current attempt for exercise `<n>`
 - once reviewed, mark the attempt as `completed`
 
 ### `dist-sys <n> review <attempt-id>`
+
 - review a specific previous attempt
 - once reviewed, mark the attempt as `completed`
 

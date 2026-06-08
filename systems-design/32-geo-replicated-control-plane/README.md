@@ -18,22 +18,24 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 5, **Replication**
+
+- _Designing Data-Intensive Applications_ — Chapter 5, **Replication**
   - Why: baseline reading for geo-replication trade-offs.
-- *Designing Data-Intensive Applications* — Chapter 9, **Consistency and Consensus**
+- _Designing Data-Intensive Applications_ — Chapter 9, **Consistency and Consensus**
   - Why: necessary for control-plane correctness across regions.
 - AWS Well-Architected — **Reliability Pillar**: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
   - Why: practical framing for regional failure and recovery goals.
 
 ### Optional (10–15 minutes)
+
 - OpenTelemetry docs — **Signals**: https://opentelemetry.io/docs/concepts/signals/
   - Why: useful for monitoring a control plane under failover and degraded modes.
 
 ### Enough for today when you understand
+
 - why multi-region adds both latency and correctness pressure
 - why control-plane consistency is not the same as data-plane throughput
 - why degraded operation must be designed before the outage happens
-
 
 ## What to build
 
@@ -50,7 +52,6 @@ A good solution makes region-failure behavior explicit, chooses a consistency mo
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

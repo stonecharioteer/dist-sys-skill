@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: helpful for state layout and retrieval-path thinking.
-- *Designing Data-Intensive Applications* — Chapter 4, **Encoding and Evolution**
+- _Designing Data-Intensive Applications_ — Chapter 4, **Encoding and Evolution**
   - Why: useful for evolving memory formats and summaries over time.
 
 ### Optional (10–15 minutes)
+
 - OpenTelemetry docs — **Signals**: https://opentelemetry.io/docs/concepts/signals/
   - Why: good if you want to think ahead about memory quality and latency signals.
 
 ### Enough for today when you understand
+
 - why memory state is not just raw storage
 - why summaries are a lossy representation with operational consequences
 - why retrieval path and retention policy both matter
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution explains what raw state is stored, what is summarized, how summa
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

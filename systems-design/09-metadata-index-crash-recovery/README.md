@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: sets up derived data structures and update-path trade-offs.
 - PostgreSQL documentation — **Write-Ahead Logging (WAL)**: https://www.postgresql.org/docs/current/wal-intro.html
   - Why: gives a concrete model for durable ordering and crash recovery.
 
 ### Optional (10–15 minutes)
+
 - PostgreSQL documentation — **Introduction to Indexes**: https://www.postgresql.org/docs/current/indexes-intro.html
   - Why: useful reminder that secondary structures have maintenance cost.
 
 ### Enough for today when you understand
+
 - why primary data and derived indexes can diverge
 - why recovery ordering matters
 - when rebuild-on-startup is better than persisting everything
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution explains which indexes are persisted, which can be rebuilt, and 
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

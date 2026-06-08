@@ -187,19 +187,27 @@ def cmd_next(exercises: list[Exercise]) -> int:
     unreviewed = [e for e in exercises if e.latest_unreviewed]
     if unreviewed:
         e = unreviewed[0]
-        print(f"recommended\t{e.number:02d}\t{e.title}\treview or continue latest unreviewed attempt")
+        print(
+            f"recommended\t{e.number:02d}\t{e.title}\treview or continue latest unreviewed attempt"
+        )
         return 0
 
-    untouched = [e for e in exercises if not e.attempts and prereqs_satisfied(e, by_num)]
+    untouched = [
+        e for e in exercises if not e.attempts and prereqs_satisfied(e, by_num)
+    ]
     if not untouched:
         untouched = [e for e in exercises if not e.attempts]
 
     if not untouched:
-        print("recommended\t--\tAll exercises have at least one attempt\tconsider review or a new attempt")
+        print(
+            "recommended\t--\tAll exercises have at least one attempt\tconsider review or a new attempt"
+        )
         return 0
 
     default = untouched[0]
-    print(f"recommended\t{default.number:02d}\t{default.title}\tfirst untouched exercise with satisfied prerequisites")
+    print(
+        f"recommended\t{default.number:02d}\t{default.title}\tfirst untouched exercise with satisfied prerequisites"
+    )
     alternatives = untouched[1:4]
     for e in alternatives:
         print(f"alternative\t{e.number:02d}\t{e.title}\talso a reasonable next step")
@@ -215,7 +223,9 @@ def cmd_exercise_list(exercises: list[Exercise], number: int) -> int:
         return 0
     print("Attempt ID\tDate\tStatus\tReviewed\tAssets")
     for a in ex.attempts:
-        print(f"{a.attempt_id}\t{a.date or '-'}\t{a.status or '-'}\t{a.review_status or '-'}\t{a.assets_count}")
+        print(
+            f"{a.attempt_id}\t{a.date or '-'}\t{a.status or '-'}\t{a.review_status or '-'}\t{a.assets_count}"
+        )
     return 0
 
 

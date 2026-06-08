@@ -18,7 +18,8 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: helpful for ingestion, replay, and downstream processing.
 - Wikipedia — **Idempotence**: https://en.wikipedia.org/wiki/Idempotence
   - Why: the shortest useful reading for duplicate delivery and safe replay.
@@ -26,10 +27,10 @@ This exercise exists to strengthen the step from the previous topics into `distr
   - Why: practical grounding for duplicate and delayed delivery behavior.
 
 ### Enough for today when you understand
+
 - why inbound acknowledgment boundaries matter
 - why dedupe and replay are first-class design concerns
 - why retry behavior can create duplicate side effects
-
 
 ## What to build
 
@@ -46,7 +47,6 @@ A good solution is explicit about when it acknowledges receipt, how it deduplica
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

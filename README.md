@@ -131,9 +131,7 @@ Add the repo path to Pi's `skills` array in settings:
 
 ```json
 {
-  "skills": [
-    "/Users/stonecharioteer/code/checkouts/learning/dist-sys-skill"
-  ]
+  "skills": ["/Users/stonecharioteer/code/checkouts/learning/dist-sys-skill"]
 }
 ```
 

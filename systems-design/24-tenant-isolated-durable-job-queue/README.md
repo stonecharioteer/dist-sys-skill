@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
+
 - Apache Kafka documentation: https://kafka.apache.org/documentation/
   - Why: useful for partitions, consumers, and durable delivery mental models.
 - AWS Builders’ Library — **Workload isolation using shuffle sharding**: https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/
   - Why: one of the best practical readings for tenant isolation under burst.
 
 ### Optional (10–15 minutes)
+
 - AWS Builders’ Library — **Using load shedding to avoid overload**: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
   - Why: complements fairness with overload behavior.
 
 ### Enough for today when you understand
+
 - why durable delivery and tenant fairness pull in different directions
 - why hot tenants can bury shared infrastructure
 - why isolation strategy is part of the queue design itself
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution defines tenant placement, fairness policy, delivery semantics, a
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

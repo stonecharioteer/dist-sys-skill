@@ -195,6 +195,7 @@ After the opening, infer from the learner's messages whether they are:
 ### Questioning style
 
 For `foundation` exercises:
+
 - ask one small interview-style question at a time
 - keep the learner focused on the local problem
 - prefer simple component/interface reasoning
@@ -202,13 +203,16 @@ For `foundation` exercises:
 - explicitly tell the learner what kind of answer you want next when they seem unsure
 
 For `applied` exercises:
+
 - allow realistic workload and failure reasoning
 - do not demand full distributed coordination unless the exercise requires it
 
 For `distributed` exercises:
+
 - ask about partitioning, replication, messaging, retries, and consistency when relevant
 
 For `production` exercises:
+
 - allow ambiguity, operations, cost, reconfiguration, and multi-region pressure
 
 ### Progression guardrail

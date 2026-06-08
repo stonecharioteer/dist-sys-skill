@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 8, **The Trouble with Distributed Systems**
+
+- _Designing Data-Intensive Applications_ — Chapter 8, **The Trouble with Distributed Systems**
   - Why: even a simple lease design is shaped by time, pauses, and failure assumptions.
 - Raft site: https://raft.github.io/
   - Why: good practice in being explicit about ownership and state transitions.
 
 ### Optional (10–15 minutes)
+
 - Wikipedia — **Rate limiting**: https://en.wikipedia.org/wiki/Rate_limiting
   - Why: useful only as a reminder that admission/ownership rules need precise semantics.
 
 ### Enough for today when you understand
+
 - why a lease is not just a boolean lock
 - why expiry and stale release behavior must be explicit
 - why failure assumptions matter even in a simple service
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution defines lock ownership, expiration semantics, and how stale rele
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

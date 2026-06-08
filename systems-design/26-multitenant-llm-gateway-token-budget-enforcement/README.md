@@ -18,18 +18,19 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
+
 - AWS Builders’ Library — **Using load shedding to avoid overload**: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
   - Why: admission control is central to a token-budget gateway.
 - OpenTelemetry docs — **Signals**: https://opentelemetry.io/docs/concepts/signals/
   - Why: budgeting and spend-control systems need strong observability.
-- *Designing Data-Intensive Applications* — Chapter 5, **Replication** or Chapter 6, **Partitioning**
+- _Designing Data-Intensive Applications_ — Chapter 5, **Replication** or Chapter 6, **Partitioning**
   - Why: read the one you need most depending on whether you want to focus on accounting correctness or tenant sharding.
 
 ### Enough for today when you understand
+
 - why request count is a poor proxy for LLM spend
 - why accounting, routing, and quotas interact tightly
 - why admission control and reconciliation are different stages
-
 
 ## What to build
 
@@ -46,7 +47,6 @@ A good solution defines admission checks, reconciliation of predicted vs actual 
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

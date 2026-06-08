@@ -18,20 +18,22 @@ This exercise exists to strengthen the step from the previous topics into `produ
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: strong foundation for durable step execution and eventful workflows.
 - AWS Builders’ Library — **Timeouts, retries, and backoff with jitter**: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
   - Why: excellent practical reading for tool-call retries and failure amplification.
 
 ### Optional (10–15 minutes)
+
 - OpenTelemetry docs — **Signals**: https://opentelemetry.io/docs/concepts/signals/
   - Why: useful if you want better trace vocabulary for multi-step agent runs.
 
 ### Enough for today when you understand
+
 - why an orchestrator needs explicit durable state
 - why retries and branching can amplify work unexpectedly
 - why traceability is part of correctness for long-running workflows
-
 
 ## What to build
 
@@ -48,7 +50,6 @@ A good solution defines workflow state, tool isolation, retry/idempotency bounda
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

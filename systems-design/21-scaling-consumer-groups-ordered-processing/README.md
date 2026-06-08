@@ -18,16 +18,17 @@ This exercise exists to strengthen the step from the previous topics into `distr
 ## Prep reading
 
 ### Required (about 40–55 minutes total)
+
 - Apache Kafka documentation: https://kafka.apache.org/documentation/
   - Why: best short official source for partitions, ordering, and consumer groups.
-- *Designing Data-Intensive Applications* — Chapter 11, **Stream Processing**
+- _Designing Data-Intensive Applications_ — Chapter 11, **Stream Processing**
   - Why: complements Kafka with stronger system-level reasoning.
 
 ### Enough for today when you understand
+
 - why ordering scope limits parallelism
 - why consumer lag is a first-class signal
 - why rebalances are not free
-
 
 ## What to build
 
@@ -44,7 +45,6 @@ A good solution quantifies partitions, consumer parallelism, lag budgets, and wh
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 

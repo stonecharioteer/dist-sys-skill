@@ -18,7 +18,8 @@ This exercise exists to strengthen the step from the previous topics into `appli
 ## Prep reading
 
 ### Required (about 45–60 minutes total)
-- *Designing Data-Intensive Applications* — Chapter 3, **Storage and Retrieval**
+
+- _Designing Data-Intensive Applications_ — Chapter 3, **Storage and Retrieval**
   - Why: strongest chapter for local indexing and query access paths.
 - PostgreSQL documentation — **Introduction to Indexes**: https://www.postgresql.org/docs/current/indexes-intro.html
   - Why: concise operational intuition for index-backed retrieval.
@@ -26,10 +27,10 @@ This exercise exists to strengthen the step from the previous topics into `appli
   - Why: useful reminder that index choice depends on query shape.
 
 ### Enough for today when you understand
+
 - why indexing and serving are separate concerns
 - why freshness lag is part of retrieval design
 - why pagination and ranking change access-path needs
-
 
 ## What to build
 
@@ -46,7 +47,6 @@ A good solution explains ingestion, indexing, search query flow, and how updates
 - key invariants and trade-offs
 - failure handling notes
 - observability or debugging signals appropriate for the tier
-
 
 ## Interactive study loop
 
