@@ -51,7 +51,7 @@ The controlling commands for this exercise are:
 - `dist-sys 05 list`
 - `dist-sys 05 review`
 
-After `start` or `new`, the agent should switch into natural-chat interview mode and keep appending learner work to the active attempt folder under `submissions/`.
+After `start` or `new`, the agent should switch into natural-chat interview mode and keep appending learner work to the active attempt folder under `~/.dist-sys/<exercise-folder>/submissions/`.
 
 Expected attempt files:
 

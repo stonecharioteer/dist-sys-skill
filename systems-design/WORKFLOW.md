@@ -86,18 +86,19 @@ The learner should not need extra commands for ordinary back-and-forth.
 
 ## Attempt storage layout
 
-Each exercise stores attempts in its own `submissions/` directory.
+Each exercise stores attempts by default under `~/.dist-sys/`. Create `~/.dist-sys/` if it does not already exist.
 
 ```text
-<exercise-folder>/
-  submissions/
-    YYYY-MM-DD-attempt-01/
-      submission.md
-      review.md
-      metadata.yaml
-      assets/
-        diagram-01.png
-        diagram-02.svg
+~/.dist-sys/
+  <exercise-folder>/
+    submissions/
+      YYYY-MM-DD-attempt-01/
+        submission.md
+        review.md
+        metadata.yaml
+        assets/
+          diagram-01.png
+          diagram-02.svg
 ```
 
 ## Diagram submissions

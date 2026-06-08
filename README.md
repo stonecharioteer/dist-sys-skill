@@ -31,6 +31,7 @@ After `start` or `new`, the interaction should continue as natural chat in mock-
 - new attempts start as `in_progress`
 - after review they should become `completed`
 - use `dist-sys <n> new` to retry an exercise later
+- attempts are stored by default under `~/.dist-sys/`, which should be created automatically if missing
 
 ## Reading material
 
@@ -156,6 +157,6 @@ If you want the `/dist-sys` prompt shortcut, copy `prompts/dist-sys.md` into:
 - `~/.pi/agent/prompts/`
 - or `.pi/prompts/` in your project
 
-## Submissions are ignored
+## Attempt storage
 
-Learner attempts live under each exercise's `submissions/` directory and are gitignored so other users can use the repo cleanly.
+Learner attempts live by default under `~/.dist-sys/<exercise-folder>/submissions/` so the repo stays clean and reusable for other learners.

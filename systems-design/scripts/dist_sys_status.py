@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -9,6 +10,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX_PATH = ROOT / "index.yaml"
+DIST_SYS_HOME = Path(
+    os.environ.get("DIST_SYS_HOME", str(Path.home() / ".dist-sys"))
+).expanduser()
 
 
 @dataclass
@@ -109,11 +113,20 @@ def parse_metadata(path: Path) -> dict[str, str]:
     return data
 
 
+def attempt_store_root() -> Path:
+    DIST_SYS_HOME.mkdir(parents=True, exist_ok=True)
+    return DIST_SYS_HOME
+
+
+def submissions_dir_for(folder: Path) -> Path:
+    return attempt_store_root() / folder.name / "submissions"
+
+
 def load_exercises() -> list[Exercise]:
     result: list[Exercise] = []
     for item in load_index():
         folder = ROOT / item["folder"]
-        subdir = folder / "submissions"
+        subdir = submissions_dir_for(folder)
         attempts: list[Attempt] = []
         if subdir.exists():
             for attempt_dir in sorted(p for p in subdir.iterdir() if p.is_dir()):
@@ -155,14 +168,15 @@ def cmd_ls(exercises: list[Exercise], filter_name: str | None) -> int:
         print("No matching exercises.")
         return 0
 
-    print("#\tExercise\tAttempts\tLatest\tStatus\tReviewed")
+    print("| # | Exercise | Attempts | Latest | Status | Reviewed |")
+    print("| --- | --- | ---: | --- | --- | --- |")
     for e in selected:
         latest = e.latest
         print(
-            f"{e.number:02d}\t{e.title}\t{len(e.attempts)}\t"
-            f"{latest.attempt_id if latest else '-'}\t"
-            f"{latest.status if latest and latest.status else '-'}\t"
-            f"{latest.review_status if latest and latest.review_status else '-'}"
+            f"| {e.number:02d} | {e.title} | {len(e.attempts)} | "
+            f"{latest.attempt_id if latest else '-'} | "
+            f"{latest.status if latest and latest.status else '-'} | "
+            f"{latest.review_status if latest and latest.review_status else '-'} |"
         )
     return 0
 
@@ -221,10 +235,11 @@ def cmd_exercise_list(exercises: list[Exercise], number: int) -> int:
     if not ex.attempts:
         print(f"{number:02d}\t{ex.title}\tno attempts")
         return 0
-    print("Attempt ID\tDate\tStatus\tReviewed\tAssets")
+    print("| Attempt ID | Date | Status | Reviewed | Assets |")
+    print("| --- | --- | --- | --- | ---: |")
     for a in ex.attempts:
         print(
-            f"{a.attempt_id}\t{a.date or '-'}\t{a.status or '-'}\t{a.review_status or '-'}\t{a.assets_count}"
+            f"| {a.attempt_id} | {a.date or '-'} | {a.status or '-'} | {a.review_status or '-'} | {a.assets_count} |"
         )
     return 0
 

@@ -68,7 +68,8 @@ python3 systems-design/scripts/dist_sys_status.py ls [attempted|pending]
 
 Show a curriculum-wide summary.
 
-For each exercise, compute from its `submissions/` directory:
+For each exercise, compute from its default submissions directory under `~/.dist-sys/<exercise-folder>/submissions/`.
+Create `~/.dist-sys/` first if it does not exist.
 
 - exercise number and title
 - attempt count
@@ -119,7 +120,8 @@ When responding, include:
 ### `dist-sys <n> start`
 
 1. Resolve the exercise from `index.yaml`.
-2. Check `submissions/` in that exercise folder.
+2. Check the exercise's default submissions directory at `~/.dist-sys/<exercise-folder>/submissions/`.
+   Create `~/.dist-sys/` first if it does not exist.
 3. If there is an unfinished attempt (`metadata.yaml` with `status: in_progress`), resume it.
 4. Otherwise create a new dated attempt.
 5. Start the guided study loop in **interviewer mode**.
@@ -138,7 +140,7 @@ Use the helper script:
 python3 systems-design/scripts/dist_sys_status.py exercise-list <n>
 ```
 
-List attempts in the exercise's `submissions/` directory with:
+List attempts in the exercise's default submissions directory under `~/.dist-sys/` with:
 
 - attempt id
 - date
@@ -231,10 +233,10 @@ Reward a strong answer to the current exercise, not a premature answer to later 
 
 ## Attempt creation
 
-Attempt folders live under the selected exercise:
+Attempt folders live under the selected exercise's default attempt store:
 
 ```text
-submissions/YYYY-MM-DD-attempt-XX/
+~/.dist-sys/<exercise-folder>/submissions/YYYY-MM-DD-attempt-XX/
 ```
 
 Create these files:
@@ -302,7 +304,8 @@ You may use shell commands for directory creation, copying assets, and listing a
 
 Typical operations include:
 
-- create attempt directories
+- create `~/.dist-sys/` if it does not exist
+- create attempt directories under `~/.dist-sys/<exercise-folder>/submissions/`
 - populate files from templates
 - use `python3 systems-design/scripts/dist_sys_status.py ...` for `ls`, `next`, and attempt listing
 - copy learner-provided diagram files into `assets/`

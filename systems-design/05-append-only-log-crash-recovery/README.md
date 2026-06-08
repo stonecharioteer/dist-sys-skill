@@ -62,4 +62,4 @@ Typical entry commands:
 - `dist-sys 05 list`
 - `dist-sys 05 review`
 
-During an active attempt, the rest of the interaction should be natural chat. Your dated submissions and reviews should live under [`./submissions/`](./submissions/).
+During an active attempt, the rest of the interaction should be natural chat. Your dated submissions and reviews should live under the exercise's default attempt store in `~/.dist-sys/<exercise-folder>/submissions/`.

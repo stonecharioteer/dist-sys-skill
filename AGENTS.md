@@ -8,7 +8,7 @@ The intended user experience is:
 
 - invoke the skill with CLI-shaped commands such as `dist-sys ls`, `dist-sys next`, or `dist-sys 01 start`
 - enter a mock-interview-style chat loop
-- have attempts recorded to per-exercise `submissions/` folders
+- have attempts recorded by default under `~/.dist-sys/<exercise-folder>/submissions/`
 - get curriculum-aware reviews that do not push later-tier complexity too early
 
 ## Interaction Model
@@ -68,7 +68,8 @@ Reviewed work can be revisited later by creating a new attempt.
 
 ## Attempt Storage
 
-Each exercise has a `submissions/` directory.
+Each exercise stores attempts by default under `~/.dist-sys/<exercise-folder>/submissions/`.
+Create `~/.dist-sys/` if it does not exist.
 
 Expected files per attempt:
 
@@ -77,7 +78,7 @@ Expected files per attempt:
 - `metadata.yaml`
 - `assets/` for diagrams such as exported Excalidraw PNG/SVG
 
-Submissions are intentionally gitignored so the repo stays reusable for other learners.
+Keeping attempts outside the repo keeps it reusable for other learners.
 
 ## Canonical Helpers
 
