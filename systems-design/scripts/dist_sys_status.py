@@ -22,6 +22,7 @@ class Attempt:
     status: str | None
     review_status: str | None
     assets_count: int
+    assessment: str
 
 
 @dataclass
@@ -113,6 +114,40 @@ def parse_metadata(path: Path) -> dict[str, str]:
     return data
 
 
+def derive_assessment(attempt_dir: Path, review_status: str | None) -> str:
+    if review_status != "reviewed":
+        return "not_reviewed"
+
+    review_path = attempt_dir / "review.md"
+    if not review_path.exists():
+        return "not_reviewed"
+
+    lines = review_path.read_text().splitlines()
+    in_section = False
+    for line in lines:
+        stripped = line.strip().lower()
+        if stripped == "## recommended next step":
+            in_section = True
+            continue
+        if in_section and stripped.startswith("## "):
+            break
+        if not in_section:
+            continue
+        if stripped.startswith("- "):
+            rec = stripped[2:].strip()
+            if "move on" in rec:
+                return "move_on"
+            if "revise now" in rec:
+                return "revise_now"
+            if "revise this attempt" in rec:
+                return "revise_now"
+            if "redo later" in rec:
+                return "redo_later"
+            if "retry later" in rec:
+                return "redo_later"
+    return "not_reviewed"
+
+
 def attempt_store_root() -> Path:
     DIST_SYS_HOME.mkdir(parents=True, exist_ok=True)
     return DIST_SYS_HOME
@@ -142,6 +177,9 @@ def load_exercises() -> list[Exercise]:
                         status=meta.get("status"),
                         review_status=meta.get("review_status"),
                         assets_count=assets_count,
+                        assessment=derive_assessment(
+                            attempt_dir, meta.get("review_status")
+                        ),
                     )
                 )
         result.append(
@@ -168,15 +206,16 @@ def cmd_ls(exercises: list[Exercise], filter_name: str | None) -> int:
         print("No matching exercises.")
         return 0
 
-    print("| # | Exercise | Attempts | Latest | Status | Reviewed |")
-    print("| --- | --- | ---: | --- | --- | --- |")
+    print("| # | Exercise | Attempts | Latest | Status | Reviewed | Assessment |")
+    print("| --- | --- | ---: | --- | --- | --- | --- |")
     for e in selected:
         latest = e.latest
         print(
             f"| {e.number:02d} | {e.title} | {len(e.attempts)} | "
             f"{latest.attempt_id if latest else '-'} | "
             f"{latest.status if latest and latest.status else '-'} | "
-            f"{latest.review_status if latest and latest.review_status else '-'} |"
+            f"{latest.review_status if latest and latest.review_status else '-'} | "
+            f"{latest.assessment if latest else '-'} |"
         )
     return 0
 
@@ -235,11 +274,11 @@ def cmd_exercise_list(exercises: list[Exercise], number: int) -> int:
     if not ex.attempts:
         print(f"{number:02d}\t{ex.title}\tno attempts")
         return 0
-    print("| Attempt ID | Date | Status | Reviewed | Assets |")
-    print("| --- | --- | --- | --- | ---: |")
+    print("| Attempt ID | Date | Status | Reviewed | Assessment | Assets |")
+    print("| --- | --- | --- | --- | --- | ---: |")
     for a in ex.attempts:
         print(
-            f"| {a.attempt_id} | {a.date or '-'} | {a.status or '-'} | {a.review_status or '-'} | {a.assets_count} |"
+            f"| {a.attempt_id} | {a.date or '-'} | {a.status or '-'} | {a.review_status or '-'} | {a.assessment} | {a.assets_count} |"
         )
     return 0
 

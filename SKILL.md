@@ -77,6 +77,18 @@ Create `~/.dist-sys/` first if it does not exist.
 - latest attempt date if any
 - whether any attempt is still in progress
 - whether the latest attempt has been reviewed
+- assessment of the latest attempt if it has been reviewed, using a compact action-oriented label that tells the learner at a glance whether they should revisit it later
+
+Assessment should be a short, action-oriented summary derived from the latest reviewed attempt's `review.md`, preferably from the review's recommended next step or equivalent top-level judgment.
+
+Prefer labels that are glanceable and directly answer "what should I do with this later?", such as:
+
+- `move_on`
+- `revise_now`
+- `redo_later`
+- `not_reviewed` when no reviewed latest attempt exists
+
+Avoid vague labels. The assessment should help the learner immediately decide whether the exercise is done for now or worth revisiting.
 
 Filters:
 
@@ -179,7 +191,8 @@ First, frame the exercise like an interviewer would:
 4. Mention any especially important constraints.
 5. Tell the learner what kind of answer is expected at this tier.
 6. Show the bounded **Prep reading** section from the exercise `README.md` as part of the opening, preserving any required vs optional structure and links.
-7. Ask the first interview question.
+7. Ask the learner to briefly restate the problem in their own words before moving into design details.
+8. Only after that, ask the first substantive interview question.
 
 A good opening sounds like:
 
@@ -187,7 +200,8 @@ A good opening sounds like:
 - "You're designing an in-process rate-limiting component for a single API process..."
 - "Keep this local and simple; no distributed coordination yet."
 - "Prep reading: ..."
-- "I'll ask this like a mock interview. Start by telling me your assumptions and the interface you want to design."
+- "Before we go deeper, restate the problem in your own words so I can check we have the same mental model."
+- "Then tell me how you would choose to approach the answer."
 
 After the opening, infer from the learner's messages whether they are:
 
@@ -207,6 +221,11 @@ For `foundation` exercises:
 - prefer simple component/interface reasoning
 - do not push later distributed concerns
 - explicitly tell the learner what kind of answer you want next when they seem unsure
+- begin by asking the learner to rephrase the problem in their own words and describe how they would like to approach the answer
+- avoid prematurely steering them toward a specific implementation shape before they have shown their own understanding
+- do not reveal the most polished or "optimal" solution structure too early; let the learner propose a direction first, then coach from there
+- do not embed likely answers in the question itself through leading examples, parenthetical hints, or suggested data structures/API shapes unless the learner explicitly asks for hints
+- when asking about design choices, prefer open questions first; only offer examples after the learner asks for help or is clearly stuck
 
 For `applied` exercises:
 
@@ -302,6 +321,14 @@ When reviewing:
 
 Write the full result to `review.md` using `systems-design/templates/attempt-review-template.md` as the shape.
 
+When possible, make the review's final recommendation easy to parse from the `## Recommended next step` section so `dist-sys ls` can surface a compact latest-attempt assessment.
+
+Prefer exact phrases that map cleanly to the `ls` assessment label, for example:
+
+- `move on`
+- `revise now`
+- `redo later`
+
 ## Practical file operations
 
 You may use shell commands for directory creation, copying assets, and listing attempts.
@@ -323,4 +350,7 @@ Typical operations include:
 - Ask the next useful question instead of flooding them with the whole rubric.
 - Be explicit about scope when the learner is overcomplicating the exercise.
 - When starting an attempt, frame the problem before questioning.
+- Ask the learner to restate the problem in their own words before drilling into design specifics.
+- Let the learner propose an initial approach before suggesting likely solution structures.
+- Avoid putting candidate answers into the prompt unless the learner explicitly asks for examples or hints.
 - When the learner seems lost, restate the problem and ask a narrower interview question.
